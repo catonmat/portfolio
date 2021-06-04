@@ -1,6 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const  { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+// image minification
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
+const { extendDefaultPlugins } = require("svgo");
 
 module.exports = {
   entry:  './src/index.js',
@@ -35,7 +38,35 @@ module.exports = {
       title: "Richard Jarram",
       template: "src/index.html"
     }),
-    new WebpackManifestPlugin()
+    // generate manifest for sourcemaps: https://webpack.js.org/guides/output-management/#the-manifest
+    new WebpackManifestPlugin(),
+    // image minifcation: https://webpack.js.org/plugins/image-minimizer-webpack-plugin/#root
+    new ImageMinimizerPlugin({
+      minimizerOptions: {
+        plugins: [
+          ["gifsicle", { interlaced: true }],
+          ["jpegtran", { progressive: true }],
+          ["optipng", { optimizationLevel: 5 }],
+          [
+            "svgo", 
+            {
+              plugins: extendDefaultPlugins([
+                {
+                  name: "removeViewBox",
+                  active: false,
+                },
+                {
+                  name: "addAttributesToSVGElement",
+                  params: {
+                    attributes: [{ xmlns: "http://www.w3.org/2000/svg" }]
+                  }
+                }
+              ])
+            }
+          ]
+        ]
+      }
+    })
   ],
   module: {
     rules: [
@@ -52,7 +83,7 @@ module.exports = {
         // https://webpack.js.org/guides/asset-modules/
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         include: path.resolve(__dirname, 'src'),
-        type: 'asset/resource'
+        type: 'asset'
       },
       {
         // fonts

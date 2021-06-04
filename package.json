@@ -26,6 +26,11 @@
   "devDependencies": {
     "css-loader": "^5.2.6",
     "html-webpack-plugin": "^5.3.1",
+    "image-minimizer-webpack-plugin": "^2.2.0",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^9.0.0",
     "live-server": "^1.2.1",
     "style-loader": "^2.0.0",
     "webpack": "^5.38.1",

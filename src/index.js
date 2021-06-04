@@ -1,6 +1,9 @@
 import _ from "lodash"
 import "./style.css"
 
-function component() {
-  console.log('tests!');
+function hi() {
+  console.log('hello world!!');
+
 }
+
+hi();
