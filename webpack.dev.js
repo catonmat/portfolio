@@ -1,11 +1,12 @@
 const path = require('path');
+// HTML page builder
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const  { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 // image minification
 const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
-const { extendDefaultPlugins } = require("svgo");
 
 module.exports = {
+  mode: 'development',
   entry:  './src/index.js',
   // persistent caching to speed up dev builds
   cache: { type: 'memory' },
@@ -34,9 +35,20 @@ module.exports = {
     }
   },
   plugins: [
+    // HTML pages
     new HtmlWebpackPlugin({
-      title: "Richard Jarram",
-      template: "src/index.html"
+      title: 'Richard Jarram | Portfolio',
+      template: './src/pages/index.html',
+      inject: true,
+      chunks: ['index'],
+      filename: 'index.html'
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Richard Jarram | About Me',
+      template: './src/pages/about.html',
+      inject: true,
+      chunks: ['about'],
+      filename: 'about.html'
     }),
     // generate manifest for sourcemaps: https://webpack.js.org/guides/output-management/#the-manifest
     new WebpackManifestPlugin(),
@@ -44,26 +56,7 @@ module.exports = {
     new ImageMinimizerPlugin({
       minimizerOptions: {
         plugins: [
-          ["gifsicle", { interlaced: true }],
-          ["jpegtran", { progressive: true }],
-          ["optipng", { optimizationLevel: 5 }],
-          [
-            "svgo", 
-            {
-              plugins: extendDefaultPlugins([
-                {
-                  name: "removeViewBox",
-                  active: false,
-                },
-                {
-                  name: "addAttributesToSVGElement",
-                  params: {
-                    attributes: [{ xmlns: "http://www.w3.org/2000/svg" }]
-                  }
-                }
-              ])
-            }
-          ]
+          ["jpegtran", { progressive: true }]
         ]
       }
     })
