@@ -11,7 +11,7 @@ html, body {
 }
 
 .hello {
-  color: red;
+  color: green;
   /* image import test: works correctly */
   /* background: url('./images/dharma-taylor-desktop.jpg') */
 }
