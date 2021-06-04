@@ -1,6 +1,7 @@
 import _ from "lodash"
-import "./style.css"
+import printMe from './print.js'
 import DharmaTaylor from './images/dharma-taylor-desktop.jpg'
+import "./style.css"
 
 function component() {
   const element = document.createElement('div');
@@ -11,9 +12,13 @@ function component() {
 
   const imageDharmaTaylor = new Image();
   imageDharmaTaylor.src = DharmaTaylor
-
-  // Teasting image appending... it works
+  // Testing image appending... it works
   // element.appendChild(imageDharmaTaylor)
+
+  const button = document.createElement('button');
+  button.innerHTML = "Click me!";
+  button.onclick = printMe;
+  element.appendChild(button);
 
   return element;
 }
