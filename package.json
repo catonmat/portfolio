@@ -4,10 +4,10 @@
   "description": "Personal portfolio site.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "devserver": "live-server ./dist/",
     "devbuild": "npx webpack --mode development --watch",
-    "build": "npx webpack --mode production"
+    "build": "npx webpack --mode production",
+    "export-webpack": "webpack --json > src/reports/stats.json" 
   },
   "repository": {
     "type": "git",
