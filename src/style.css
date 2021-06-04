@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'coolvetica';
+  src: url('./fonts/coolvetica.ttf'), format('ttf');
+  font-weight: 600;
+  font-style: normal;
+}
+
+html, body {
+  font-family: 'coolvetica';
+  font-size: 1.125rem;
+}
+
+.hello {
+  color: red;
+  /* image import test: works correctly */
+  /* background: url('./images/dharma-taylor-desktop.jpg') */
+}
